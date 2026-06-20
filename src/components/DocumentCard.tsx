@@ -1,6 +1,10 @@
 import { motion } from "framer-motion";
 import type { DataRoomDocument } from "../data/documents";
 import { getDocumentUrl } from "../data/documents";
+import {
+  DocumentCover,
+  type DocumentAccent,
+} from "./DocumentCover";
 import { Icon } from "./Icon";
 import { scaleIn } from "./MotionSection";
 
@@ -9,9 +13,23 @@ interface DocumentCardProps {
   onPreview: (document: DataRoomDocument) => void;
 }
 
+function getDocumentAccent(document: DataRoomDocument): DocumentAccent {
+  const category = document.category.toLowerCase();
+
+  if (document.type === "XLSX" || category.includes("financial")) {
+    return "emerald";
+  }
+  if (category.includes("legal")) return "violet";
+  if (category.includes("traction")) return "cyan-blue";
+  if (category.includes("team")) return "indigo";
+  if (category.includes("use of funds")) return "blue-cyan";
+  return "blue-violet";
+}
+
 export function DocumentCard({ document, onPreview }: DocumentCardProps) {
   const url = getDocumentUrl(document);
   const isSpreadsheet = document.type === "XLSX";
+  const accent = getDocumentAccent(document);
 
   return (
     <motion.article
@@ -21,37 +39,13 @@ export function DocumentCard({ document, onPreview }: DocumentCardProps) {
       whileHover={{ y: -7, scale: 1.008 }}
       transition={{ type: "spring", stiffness: 270, damping: 24 }}
     >
-      <div
-        className={`document-visual ${
-          isSpreadsheet ? "document-visual-sheet" : "document-visual-pdf"
-        }`}
-      >
-        {isSpreadsheet ? (
-          <>
-            <div className="spreadsheet-bar" />
-            <div className="spreadsheet-grid" />
-          </>
-        ) : (
-          <div className="pdf-page">
-            <div className="flex items-center justify-between">
-              <span className="text-[0.52rem] font-bold tracking-[0.12em] text-blue-600">
-                COMPLIVIBE
-              </span>
-              <span className="h-5 w-5 rounded-md bg-gradient-to-br from-blue-600 via-cyan-500 to-violet-600" />
-            </div>
-            <div className="mt-5 h-2 w-3/4 rounded-full bg-slate-800/80" />
-            <div className="mt-2 h-1.5 w-1/2 rounded-full bg-blue-200" />
-            <div className="mt-5 space-y-2">
-              <div className="h-1 rounded-full bg-slate-200" />
-              <div className="h-1 w-5/6 rounded-full bg-slate-200" />
-              <div className="h-1 w-2/3 rounded-full bg-slate-200" />
-            </div>
-          </div>
-        )}
-        <span className="absolute bottom-3 right-3 rounded-full border border-white/80 bg-white/85 px-2.5 py-1 text-[0.6rem] font-semibold text-slate-500 shadow-sm backdrop-blur">
-          {document.type}
-        </span>
-      </div>
+      <DocumentCover
+        title={document.title}
+        fileType={document.type}
+        category={document.category}
+        accent={accent}
+        variant={isSpreadsheet ? "spreadsheet" : "document"}
+      />
 
       <div className="mt-5 flex items-start justify-between gap-5">
         <div className="file-icon">
