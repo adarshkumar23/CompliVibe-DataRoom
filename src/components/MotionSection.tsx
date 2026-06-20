@@ -37,25 +37,45 @@ export const blurReveal: Variants = {
   },
 };
 
+const sectionReveal: Variants = {
+  // Keep section content visible if IntersectionObserver is delayed or absent.
+  hidden: { opacity: 1, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
 interface MotionSectionProps {
   children: ReactNode;
   className?: string;
   id?: string;
+  reveal?: "immediate" | "viewport";
 }
 
 export function MotionSection({
   children,
   className = "",
   id,
+  reveal = "viewport",
 }: MotionSectionProps) {
+  const isImmediate = reveal === "immediate";
+
   return (
     <motion.section
       id={id}
       className={className}
-      variants={fadeUp}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.14 }}
+      variants={sectionReveal}
+      initial={isImmediate ? false : "hidden"}
+      animate={isImmediate ? "visible" : undefined}
+      whileInView={isImmediate ? undefined : "visible"}
+      // A low threshold and early bottom margin avoid resize-only reveal bugs.
+      viewport={{
+        once: true,
+        amount: 0.08,
+        margin: "0px 0px -80px 0px",
+      }}
     >
       {children}
     </motion.section>

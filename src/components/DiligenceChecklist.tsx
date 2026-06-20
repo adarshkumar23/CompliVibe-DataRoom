@@ -17,6 +17,7 @@ const checklist = [
   "Cap table",
   "Financial model",
   "Advisor agreement",
+  "Founder IP Assignment",
 ];
 
 export function DiligenceChecklist() {
@@ -24,6 +25,7 @@ export function DiligenceChecklist() {
     <MotionSection
       id="diligence"
       className="section-shell scroll-mt-28"
+      reveal="immediate"
     >
       <div className="section-heading">
         <div>
@@ -38,9 +40,8 @@ export function DiligenceChecklist() {
       <motion.div
         className="mt-10 grid gap-3 sm:grid-cols-2"
         variants={staggerContainer}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.15 }}
+        initial={false}
+        animate="visible"
       >
         {checklist.map((item, index) => (
           <motion.div

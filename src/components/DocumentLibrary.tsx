@@ -17,7 +17,10 @@ const filters = [
   { label: "Traction", categories: ["Traction & Proof"] },
   { label: "Financials", categories: ["Financials", "Use of Funds"] },
   { label: "Team", categories: ["Team"] },
-  { label: "Legal", categories: ["Legal / Advisory"] },
+  {
+    label: "Legal",
+    categories: ["Legal / Advisory", "Founder IP Assignment"],
+  },
 ];
 
 export function DocumentLibrary() {
@@ -37,7 +40,8 @@ export function DocumentLibrary() {
     <>
       <MotionSection
         id="documents"
-        className="section-shell scroll-mt-28"
+        className="section-shell section-shell-documents scroll-mt-28"
+        reveal="immediate"
       >
         <div className="section-heading">
           <div>

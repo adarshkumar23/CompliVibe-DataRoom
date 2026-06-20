@@ -139,6 +139,28 @@ export const documentGroups: DocumentGroup[] = [
       },
     ],
   },
+  {
+    category: "Founder IP Assignment",
+    eyebrow: "Legal ownership",
+    documents: [
+      {
+        title: "Founder IP Assignment — Adarsh Sharma",
+        category: "Legal / Founder IP",
+        description:
+          "Founder intellectual property assignment document for Adarsh Sharma.",
+        filename: "Founder_IP_Assignment_Adarsh.pdf",
+        type: "PDF",
+      },
+      {
+        title: "Founder IP Assignment — Saransh Jha",
+        category: "Legal / Founder IP",
+        description:
+          "Founder intellectual property assignment document for Saransh Jha.",
+        filename: "Founder_IP_Assignment_Saransh_Jha.pdf",
+        type: "PDF",
+      },
+    ],
+  },
 ];
 
 export const allDocuments = documentGroups.flatMap(

@@ -94,7 +94,11 @@ function AccessGate({ onEnter }: { onEnter: () => void }) {
 
 function InvestorSnapshot() {
   return (
-    <MotionSection id="snapshot" className="section-shell scroll-mt-28">
+    <MotionSection
+      id="snapshot"
+      className="section-shell section-shell-before-documents scroll-mt-28"
+      reveal="immediate"
+    >
       <div className="section-heading">
         <div>
           <p className="section-kicker">At a glance</p>
@@ -108,9 +112,8 @@ function InvestorSnapshot() {
       <motion.div
         className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
         variants={staggerContainer}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.15 }}
+        initial={false}
+        animate="visible"
       >
         {snapshots.map((snapshot, index) => (
           <motion.article
@@ -206,14 +209,14 @@ export default function App() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <div className="min-h-screen overflow-hidden bg-[#f8fafc] text-ink">
+      <div className="min-h-screen overflow-x-hidden bg-[#f8fafc] text-ink">
         {!hasAccess && <AccessGate onEnter={enterDataRoom} />}
         <div aria-hidden={!hasAccess}>
           <FloatingNavbar />
           <div className="page-ambient page-ambient-one" />
           <div className="page-ambient page-ambient-two" />
           <Hero />
-          <main>
+          <main className="relative">
             <InvestorSnapshot />
             <DocumentLibrary />
             <DiligenceChecklist />
