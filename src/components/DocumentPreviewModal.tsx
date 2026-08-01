@@ -91,6 +91,33 @@ export function DocumentPreviewModal({
                   src={previewUrl}
                   title={`${selectedDocument.title} PDF preview`}
                 />
+              ) : selectedDocument.type === "DOCX" ? (
+                <div className="flex h-full items-center justify-center p-5">
+                  <div className="w-full max-w-lg rounded-3xl border border-white bg-white/80 p-8 text-center shadow-glass backdrop-blur-xl">
+                    <div className="docx-preview mx-auto max-w-xs">
+                      <span className="docx-preview-rule" />
+                      <div className="docx-preview-body">
+                        <span className="docx-preview-heading" />
+                        {Array.from({ length: 5 }, (_, index) => (
+                          <span key={index} />
+                        ))}
+                      </div>
+                    </div>
+                    <p className="mt-7 text-xs font-semibold uppercase tracking-[0.14em] text-indigo-600">
+                      {selectedDocument.filename}
+                    </p>
+                    <h3 className="mt-2 text-xl font-semibold text-slate-950">
+                      Word document preview is available by download
+                    </h3>
+                    <p className="mt-3 text-sm leading-6 text-slate-500">
+                      Opens in Word, Google Docs, or Pages once downloaded.
+                    </p>
+                    <a className="button-primary mt-6" href={url} download>
+                      <Icon name="download" className="h-4 w-4" />
+                      Download document
+                    </a>
+                  </div>
+                </div>
               ) : (
                 <div className="flex h-full items-center justify-center p-5">
                   <div className="w-full max-w-lg rounded-3xl border border-white bg-white/80 p-8 text-center shadow-glass backdrop-blur-xl">
@@ -105,7 +132,7 @@ export function DocumentPreviewModal({
                       Spreadsheet preview is available by download
                     </h3>
                     <p className="mt-3 text-sm leading-6 text-slate-500">
-                      Financial model and cap table are provided as Excel files.
+                      The cap table is provided as an Excel file.
                     </p>
                     <a
                       className="button-primary mt-6"

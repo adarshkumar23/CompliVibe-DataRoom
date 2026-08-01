@@ -14,14 +14,32 @@ const filters = [
   { label: "All", categories: [] },
   { label: "Overview", categories: ["Company Overview"] },
   { label: "Investment", categories: ["Investment Materials"] },
+  { label: "Strategy", categories: ["Strategy & Planning"] },
+  { label: "Product", categories: ["Product & Technical"] },
   { label: "Traction", categories: ["Traction & Proof"] },
   { label: "Financials", categories: ["Financials", "Use of Funds"] },
+  { label: "Operations", categories: ["Governance & Operations"] },
   { label: "Team", categories: ["Team"] },
   {
     label: "Legal",
     categories: ["Legal / Advisory", "Founder IP Assignment"],
   },
 ];
+
+const groupsFor = (categories: string[]) =>
+  categories.length === 0
+    ? documentGroups
+    : documentGroups.filter((group) => categories.includes(group.category));
+
+const filterCounts = new Map(
+  filters.map((filter) => [
+    filter.label,
+    groupsFor(filter.categories).reduce(
+      (total, group) => total + group.documents.length,
+      0,
+    ),
+  ]),
+);
 
 export function DocumentLibrary() {
   const [activeFilter, setActiveFilter] = useState("All");
@@ -30,10 +48,8 @@ export function DocumentLibrary() {
 
   const visibleGroups = useMemo(() => {
     const selected = filters.find((filter) => filter.label === activeFilter);
-    if (!selected || selected.categories.length === 0) return documentGroups;
-    return documentGroups.filter((group) =>
-      selected.categories.includes(group.category),
-    );
+    if (!selected) return documentGroups;
+    return groupsFor(selected.categories);
   }, [activeFilter]);
 
   return (
@@ -50,7 +66,7 @@ export function DocumentLibrary() {
           </div>
           <p className="section-copy">
             Preview PDFs without leaving the room. Excel financials remain
-            available through secure direct download.
+            available through direct download.
           </p>
         </div>
 
@@ -77,7 +93,18 @@ export function DocumentLibrary() {
                   transition={{ type: "spring", stiffness: 420, damping: 34 }}
                 />
               )}
-              <span className="relative">{filter.label}</span>
+              <span className="relative flex items-center gap-1.5">
+                {filter.label}
+                <span
+                  className={`filter-tab-count ${
+                    activeFilter === filter.label
+                      ? "filter-tab-count-active"
+                      : ""
+                  }`}
+                >
+                  {filterCounts.get(filter.label)}
+                </span>
+              </span>
             </button>
           ))}
         </div>
@@ -108,7 +135,9 @@ export function DocumentLibrary() {
                   </span>
                 </div>
                 <motion.div
-                  className="grid gap-4 md:grid-cols-2"
+                  className={`grid gap-4 ${
+                    group.documents.length === 1 ? "" : "md:grid-cols-2"
+                  }`}
                   variants={staggerContainer}
                 >
                   {group.documents.map((document) => (

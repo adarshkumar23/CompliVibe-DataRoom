@@ -8,14 +8,19 @@ import {
 
 const checklist = [
   "Company overview",
+  "Company & product report",
   "Investment memo",
+  "Business model",
   "Investor FAQ",
   "Startup thesis",
+  "Strategic plan (2-year & 5-year)",
+  "Verified feature catalog",
   "Traction",
+  "Cap table",
+  "Unit economics",
+  "Operations & policy manuals",
   "Team bios",
   "Use of funds",
-  "Cap table",
-  "Financial model",
   "Advisor agreement",
   "Founder IP Assignment",
 ];

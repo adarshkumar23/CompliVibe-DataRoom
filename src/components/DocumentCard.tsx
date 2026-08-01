@@ -23,12 +23,16 @@ function getDocumentAccent(document: DataRoomDocument): DocumentAccent {
   if (category.includes("traction")) return "cyan-blue";
   if (category.includes("team")) return "indigo";
   if (category.includes("use of funds")) return "blue-cyan";
+  if (category.includes("product")) return "sky";
+  if (category.includes("governance")) return "teal";
+  if (category.includes("strategy")) return "indigo";
   return "blue-violet";
 }
 
 export function DocumentCard({ document, onPreview }: DocumentCardProps) {
   const url = getDocumentUrl(document);
   const isSpreadsheet = document.type === "XLSX";
+  const isWordDoc = document.type === "DOCX";
   const accent = getDocumentAccent(document);
 
   return (
@@ -44,7 +48,9 @@ export function DocumentCard({ document, onPreview }: DocumentCardProps) {
         fileType={document.type}
         category={document.category}
         accent={accent}
-        variant={isSpreadsheet ? "spreadsheet" : "document"}
+        variant={
+          isSpreadsheet ? "spreadsheet" : isWordDoc ? "docx" : "document"
+        }
       />
 
       <div className="mt-5 flex items-start justify-between gap-5">
@@ -55,7 +61,9 @@ export function DocumentCard({ document, onPreview }: DocumentCardProps) {
           className={`file-badge ${
             isSpreadsheet
               ? "bg-emerald-50 text-emerald-700 ring-emerald-600/10"
-              : "bg-blue-50 text-blue-700 ring-blue-600/10"
+              : isWordDoc
+                ? "bg-indigo-50 text-indigo-700 ring-indigo-600/10"
+                : "bg-blue-50 text-blue-700 ring-blue-600/10"
           }`}
         >
           {document.type}

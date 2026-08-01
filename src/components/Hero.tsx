@@ -40,7 +40,7 @@ export function Hero() {
         aria-hidden="true"
       >
         <div className="floating-file-page">
-          <span className="floating-file-label">Financial Model</span>
+          <span className="floating-file-label">Cap Table</span>
           <div className="mini-grid mt-4" />
         </div>
       </motion.div>
@@ -112,7 +112,7 @@ export function Hero() {
           <MetricCard value="3" label="Paying customers" />
           <MetricCard value="5" label="Beta trials" />
           <MetricCard value="13" label="Waitlist accounts" />
-          <MetricCard value="$150K" label="Angel / pre-seed round" />
+          <MetricCard value="$150K" label="Seed round" />
           <MetricCard value="$1.5M" label="Post-money" />
           <MetricCard
             value="Live"

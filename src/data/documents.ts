@@ -1,4 +1,4 @@
-export type DocumentType = "PDF" | "XLSX";
+export type DocumentType = "PDF" | "XLSX" | "DOCX";
 
 export interface DataRoomDocument {
   title: string;
@@ -34,6 +34,14 @@ export const documentGroups: DocumentGroup[] = [
         type: "PDF",
       },
       {
+        title: "Company & Product Report",
+        category: "Company Overview",
+        description:
+          "The consolidated picture — positioning, product, traction, market, model, forward plans, and team.",
+        filename: "CompliVibe_Company_Report.pdf",
+        type: "PDF",
+      },
+      {
         title: "Startup Thesis",
         category: "Company Overview",
         description:
@@ -56,11 +64,55 @@ export const documentGroups: DocumentGroup[] = [
         type: "PDF",
       },
       {
+        title: "Business Model",
+        category: "Investment Materials",
+        description:
+          "Revenue streams, subscription tiers, risk-based pricing, and the expansion mechanics behind recurring revenue.",
+        filename: "CompliVibe_Business_Model.pdf",
+        type: "PDF",
+      },
+      {
         title: "Investor FAQ",
         category: "Investment Materials",
         description:
           "Investor-safe answers for company, product, traction, competition, financing, legal, and risk questions.",
         filename: "CompliVibe_Data_Room_FAQ.pdf",
+        type: "PDF",
+      },
+    ],
+  },
+  {
+    category: "Strategy & Planning",
+    eyebrow: "Direction",
+    documents: [
+      {
+        title: "Two-Year Strategic Plan",
+        category: "Strategy & Planning",
+        description:
+          "A 24-month phased plan to define and own the AI Trust category, with operating principles and milestones.",
+        filename: "CompliVibe_TwoYear_Plan.pdf",
+        type: "PDF",
+      },
+      {
+        title: "Five-Year Vision",
+        category: "Strategy & Planning",
+        description:
+          "The long-horizon thesis for becoming foundational AI trust infrastructure — the bets, pillars, and end state.",
+        filename: "CompliVibe_FiveYear_Vision.pdf",
+        type: "PDF",
+      },
+    ],
+  },
+  {
+    category: "Product & Technical",
+    eyebrow: "Platform depth",
+    documents: [
+      {
+        title: "Verified Feature Catalog",
+        category: "Product & Technical",
+        description:
+          "249 test-backed, fully operational capabilities across 19 product domains, in plain language.",
+        filename: "CompliVibe_Verified_Feature_Catalog.pdf",
         type: "PDF",
       },
     ],
@@ -91,11 +143,34 @@ export const documentGroups: DocumentGroup[] = [
         type: "XLSX",
       },
       {
-        title: "Financial Model",
+        title: "Unit Economics",
         category: "Financials",
-        description: "Runway, hiring, operating assumptions, and funding plan.",
-        filename: "CompliVibe_Financial_Model.xlsx",
-        type: "XLSX",
+        description:
+          "LTV:CAC, payback period, gross margin, and retention per tier — blended and stress-tested.",
+        filename: "CompliVibe_Unit_Economics.pdf",
+        type: "PDF",
+      },
+    ],
+  },
+  {
+    category: "Governance & Operations",
+    eyebrow: "How the company runs",
+    documents: [
+      {
+        title: "Operations Manual",
+        category: "Governance & Operations",
+        description:
+          "The platform, customer, and business operating layers — who owns what, the metrics, and the review cadence.",
+        filename: "CompliVibe_Operations_Manual.pdf",
+        type: "PDF",
+      },
+      {
+        title: "Policy Manual",
+        category: "Governance & Operations",
+        description:
+          "Company-wide governance, security, privacy, and conduct policies with named owners and annual review.",
+        filename: "CompliVibe_Policy_Manual.pdf",
+        type: "PDF",
       },
     ],
   },
@@ -144,10 +219,10 @@ export const documentGroups: DocumentGroup[] = [
     eyebrow: "Legal ownership",
     documents: [
       {
-        title: "Founder IP Assignment — Adarsh Sharma",
+        title: "Founder IP Assignment — Adarsh Kumar Sharma",
         category: "Legal / Founder IP",
         description:
-          "Founder intellectual property assignment document for Adarsh Sharma.",
+          "Founder intellectual property assignment document for Adarsh Kumar Sharma.",
         filename: "Founder_IP_Assignment_Adarsh.pdf",
         type: "PDF",
       },

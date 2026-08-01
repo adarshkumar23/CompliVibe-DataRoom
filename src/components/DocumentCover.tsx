@@ -7,14 +7,16 @@ export type DocumentAccent =
   | "cyan-blue"
   | "emerald"
   | "indigo"
-  | "blue-cyan";
+  | "blue-cyan"
+  | "sky"
+  | "teal";
 
 interface DocumentCoverProps {
   title: string;
   fileType: DocumentType;
   category: string;
   accent: DocumentAccent;
-  variant: "document" | "spreadsheet";
+  variant: "document" | "spreadsheet" | "docx";
 }
 
 export function DocumentCover({
@@ -25,6 +27,7 @@ export function DocumentCover({
   variant,
 }: DocumentCoverProps) {
   const isSpreadsheet = variant === "spreadsheet";
+  const isWordDoc = variant === "docx";
 
   return (
     <div
@@ -36,7 +39,9 @@ export function DocumentCover({
         className={`document-cover ${
           isSpreadsheet
             ? "document-cover-spreadsheet"
-            : "document-cover-pdf"
+            : isWordDoc
+              ? "document-cover-docx"
+              : "document-cover-pdf"
         }`}
         whileHover={{ y: -3, scale: 1.02 }}
         transition={{ type: "spring", stiffness: 260, damping: 24 }}
@@ -57,6 +62,16 @@ export function DocumentCover({
             </div>
             <div className="document-sheet-grid">
               {Array.from({ length: 20 }, (_, index) => (
+                <span key={index} />
+              ))}
+            </div>
+          </div>
+        ) : isWordDoc ? (
+          <div className="document-doc">
+            <span className="document-doc-rule" />
+            <div className="document-doc-body">
+              <span className="document-doc-heading" />
+              {Array.from({ length: 6 }, (_, index) => (
                 <span key={index} />
               ))}
             </div>

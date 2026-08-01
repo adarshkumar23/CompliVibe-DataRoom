@@ -61,7 +61,7 @@ function AccessGate({ onEnter }: { onEnter: () => void }) {
             CompliVibe Investor Data Room
           </h1>
           <p className="mt-4 text-base leading-7 text-slate-600">
-            Confidential access for angel / pre-seed diligence
+            Confidential access for seed round diligence
           </p>
         </div>
         <button
@@ -170,7 +170,7 @@ function FounderNote() {
             </blockquote>
             <div className="mt-8 border-t border-white/20 pt-6">
               <p className="signature-name text-2xl text-white">
-                Adarsh Sharma
+                Adarsh Kumar Sharma
               </p>
               <p className="mt-1 text-sm font-medium text-blue-100">
                 Founder &amp; CEO, CompliVibe
