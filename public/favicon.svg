@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="CompliVibe">
+  <defs>
+    <linearGradient id="cv-brand" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#2563eb"/>
+      <stop offset=".5" stop-color="#06b6d4"/>
+      <stop offset="1" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="17" fill="url(#cv-brand)"/>
+  <g fill="none" stroke="#fff" stroke-width="6.3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M28.59 23.76A9.4 9.4 0 1 0 28.59 39.44"/>
+    <path d="M35.8 22.2 42.9 41.45 50 22.2"/>
+  </g>
+</svg>
