@@ -1,9 +1,10 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useMemo, useState } from "react";
 import type { DataRoomDocument } from "../data/documents";
-import { documentGroups } from "../data/documents";
+import { documentGroups, featuredDocument } from "../data/documents";
 import { DocumentCard } from "./DocumentCard";
 import { DocumentPreviewModal } from "./DocumentPreviewModal";
+import { FeaturedDocument } from "./FeaturedDocument";
 import {
   fadeUp,
   MotionSection,
@@ -14,17 +15,21 @@ const filters = [
   { label: "All", categories: [] },
   { label: "Overview", categories: ["Company Overview"] },
   { label: "Investment", categories: ["Investment Materials"] },
-  { label: "Strategy", categories: ["Strategy & Planning"] },
-  { label: "Product", categories: ["Product & Technical"] },
   { label: "Traction", categories: ["Traction & Proof"] },
   { label: "Financials", categories: ["Financials", "Use of Funds"] },
-  { label: "Operations", categories: ["Governance & Operations"] },
+  { label: "Product", categories: ["Product & Technical"] },
+  { label: "Strategy", categories: ["Strategy & Planning"] },
   { label: "Team", categories: ["Team"] },
+  { label: "Operations", categories: ["Governance & Operations"] },
   {
     label: "Legal",
     categories: ["Legal / Advisory", "Founder IP Assignment"],
   },
 ];
+
+const featured = featuredDocument;
+
+const featuredMeta = ["11 slides", "PDF", "Confidential"];
 
 const groupsFor = (categories: string[]) =>
   categories.length === 0
@@ -70,8 +75,23 @@ export function DocumentLibrary() {
           </p>
         </div>
 
+        {featured && (
+          <motion.div
+            className="mt-9"
+            variants={staggerContainer}
+            initial="hidden"
+            animate="visible"
+          >
+            <FeaturedDocument
+              document={featured}
+              meta={featuredMeta}
+              onPreview={setPreviewDocument}
+            />
+          </motion.div>
+        )}
+
         <div
-          className="tabs-scroll mt-9 flex gap-2 overflow-x-auto pb-2"
+          className="tabs-scroll mt-10 flex gap-2 overflow-x-auto pb-2"
           role="tablist"
           aria-label="Filter documents"
         >
@@ -118,38 +138,45 @@ export function DocumentLibrary() {
             animate="visible"
             exit={{ opacity: 0, y: 8 }}
           >
-            {visibleGroups.map((group) => (
-              <motion.div key={group.category} variants={fadeUp} layout>
-                <div className="mb-5 flex items-end justify-between border-b border-slate-200/80 pb-4">
-                  <div>
-                    <p className="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-blue-600">
-                      {group.eyebrow}
-                    </p>
-                    <h3 className="mt-1 text-xl font-semibold tracking-[-0.03em] text-slate-950">
-                      {group.category}
-                    </h3>
+            {visibleGroups.map((group) => {
+              const cards = group.documents.filter(
+                (document) => !document.featured,
+              );
+              if (cards.length === 0) return null;
+
+              return (
+                <motion.div key={group.category} variants={fadeUp} layout>
+                  <div className="mb-5 flex items-end justify-between border-b border-slate-200/80 pb-4">
+                    <div>
+                      <p className="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-blue-600">
+                        {group.eyebrow}
+                      </p>
+                      <h3 className="mt-1 text-xl font-semibold tracking-[-0.03em] text-slate-950">
+                        {group.category}
+                      </h3>
+                    </div>
+                    <span className="text-xs font-medium text-slate-400">
+                      {cards.length}{" "}
+                      {cards.length === 1 ? "document" : "documents"}
+                    </span>
                   </div>
-                  <span className="text-xs font-medium text-slate-400">
-                    {group.documents.length}{" "}
-                    {group.documents.length === 1 ? "document" : "documents"}
-                  </span>
-                </div>
-                <motion.div
-                  className={`grid gap-4 ${
-                    group.documents.length === 1 ? "" : "md:grid-cols-2"
-                  }`}
-                  variants={staggerContainer}
-                >
-                  {group.documents.map((document) => (
-                    <DocumentCard
-                      key={document.filename}
-                      document={document}
-                      onPreview={setPreviewDocument}
-                    />
-                  ))}
+                  <motion.div
+                    className={`grid gap-4 ${
+                      cards.length === 1 ? "" : "md:grid-cols-2"
+                    }`}
+                    variants={staggerContainer}
+                  >
+                    {cards.map((document) => (
+                      <DocumentCard
+                        key={document.filename}
+                        document={document}
+                        onPreview={setPreviewDocument}
+                      />
+                    ))}
+                  </motion.div>
                 </motion.div>
-              </motion.div>
-            ))}
+              );
+            })}
           </motion.div>
         </AnimatePresence>
       </MotionSection>

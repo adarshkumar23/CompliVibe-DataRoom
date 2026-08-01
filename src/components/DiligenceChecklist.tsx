@@ -7,6 +7,7 @@ import {
 } from "./MotionSection";
 
 const checklist = [
+  "Pitch deck",
   "Company overview",
   "Company & product report",
   "Investment memo",

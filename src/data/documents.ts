@@ -6,6 +6,8 @@ export interface DataRoomDocument {
   description: string;
   filename: string;
   type: DocumentType;
+  /** Rendered as the featured document above the library instead of in the grid. */
+  featured?: boolean;
 }
 
 export interface DocumentGroup {
@@ -23,8 +25,17 @@ export const getDocumentUrl = (document: DataRoomDocument) =>
 export const documentGroups: DocumentGroup[] = [
   {
     category: "Company Overview",
-    eyebrow: "Start here",
+    eyebrow: "Orientation",
     documents: [
+      {
+        title: "Pitch Deck",
+        category: "Company Overview",
+        description:
+          "The 11-slide investor deck — problem, solution, team, market sizing, product, traction, go-to-market, business model, and competition & moat.",
+        filename: "CompliVibe_Pitch_Deck.pdf",
+        type: "PDF",
+        featured: true,
+      },
       {
         title: "One-Pager",
         category: "Company Overview",
@@ -82,42 +93,6 @@ export const documentGroups: DocumentGroup[] = [
     ],
   },
   {
-    category: "Strategy & Planning",
-    eyebrow: "Direction",
-    documents: [
-      {
-        title: "Two-Year Strategic Plan",
-        category: "Strategy & Planning",
-        description:
-          "A 24-month phased plan to define and own the AI Trust category, with operating principles and milestones.",
-        filename: "CompliVibe_TwoYear_Plan.pdf",
-        type: "PDF",
-      },
-      {
-        title: "Five-Year Vision",
-        category: "Strategy & Planning",
-        description:
-          "The long-horizon thesis for becoming foundational AI trust infrastructure — the bets, pillars, and end state.",
-        filename: "CompliVibe_FiveYear_Vision.pdf",
-        type: "PDF",
-      },
-    ],
-  },
-  {
-    category: "Product & Technical",
-    eyebrow: "Platform depth",
-    documents: [
-      {
-        title: "Verified Feature Catalog",
-        category: "Product & Technical",
-        description:
-          "249 test-backed, fully operational capabilities across 19 product domains, in plain language.",
-        filename: "CompliVibe_Verified_Feature_Catalog.pdf",
-        type: "PDF",
-      },
-    ],
-  },
-  {
     category: "Traction & Proof",
     eyebrow: "Commercial signal",
     documents: [
@@ -153,23 +128,51 @@ export const documentGroups: DocumentGroup[] = [
     ],
   },
   {
-    category: "Governance & Operations",
-    eyebrow: "How the company runs",
+    category: "Use of Funds",
+    eyebrow: "Capital plan",
     documents: [
       {
-        title: "Operations Manual",
-        category: "Governance & Operations",
+        title: "Use of Funds",
+        category: "Use of Funds",
         description:
-          "The platform, customer, and business operating layers — who owns what, the metrics, and the review cadence.",
-        filename: "CompliVibe_Operations_Manual.pdf",
+          "Capital allocation, hiring plan, runway, and funded milestones.",
+        filename: "Use-of-Fund.pdf",
+        type: "PDF",
+      },
+    ],
+  },
+  {
+    category: "Product & Technical",
+    eyebrow: "Platform depth",
+    documents: [
+      {
+        title: "Verified Feature Catalog",
+        category: "Product & Technical",
+        description:
+          "249 test-backed, fully operational capabilities across 19 product domains, in plain language.",
+        filename: "CompliVibe_Verified_Feature_Catalog.pdf",
+        type: "PDF",
+      },
+    ],
+  },
+  {
+    category: "Strategy & Planning",
+    eyebrow: "Direction",
+    documents: [
+      {
+        title: "Two-Year Strategic Plan",
+        category: "Strategy & Planning",
+        description:
+          "A 24-month phased plan to define and own the AI Trust category, with operating principles and milestones.",
+        filename: "CompliVibe_TwoYear_Plan.pdf",
         type: "PDF",
       },
       {
-        title: "Policy Manual",
-        category: "Governance & Operations",
+        title: "Five-Year Vision",
+        category: "Strategy & Planning",
         description:
-          "Company-wide governance, security, privacy, and conduct policies with named owners and annual review.",
-        filename: "CompliVibe_Policy_Manual.pdf",
+          "The long-horizon thesis for becoming foundational AI trust infrastructure — the bets, pillars, and end state.",
+        filename: "CompliVibe_FiveYear_Vision.pdf",
         type: "PDF",
       },
     ],
@@ -188,15 +191,23 @@ export const documentGroups: DocumentGroup[] = [
     ],
   },
   {
-    category: "Use of Funds",
-    eyebrow: "Capital plan",
+    category: "Governance & Operations",
+    eyebrow: "How the company runs",
     documents: [
       {
-        title: "Use of Funds",
-        category: "Use of Funds",
+        title: "Operations Manual",
+        category: "Governance & Operations",
         description:
-          "Capital allocation, hiring plan, runway, and funded milestones.",
-        filename: "Use-of-Fund.pdf",
+          "The platform, customer, and business operating layers — who owns what, the metrics, and the review cadence.",
+        filename: "CompliVibe_Operations_Manual.pdf",
+        type: "PDF",
+      },
+      {
+        title: "Policy Manual",
+        category: "Governance & Operations",
+        description:
+          "Company-wide governance, security, privacy, and conduct policies with named owners and annual review.",
+        filename: "CompliVibe_Policy_Manual.pdf",
         type: "PDF",
       },
     ],
@@ -241,3 +252,6 @@ export const documentGroups: DocumentGroup[] = [
 export const allDocuments = documentGroups.flatMap(
   (group) => group.documents,
 );
+
+export const featuredDocument =
+  allDocuments.find((document) => document.featured) ?? null;
